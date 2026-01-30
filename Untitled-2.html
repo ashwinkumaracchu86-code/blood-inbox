@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blood Donor Inbox</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #ece5dd;
+            display: flex;
+            justify-content: center;
+            padding-top: 50px;
+        }
+
+        .inbox {
+            width: 350px;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .header {
+            background: #075e54;
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .donor {
+            display: flex;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+            align-items: center;
+            transition: background 0.2s;
+        }
+
+        .donor:hover {
+            background: #f5f5f5;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #25d366;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        .details {
+            flex: 1;
+        }
+
+        .name {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .blood {
+            color: #555;
+            font-size: 14px;
+        }
+
+        .lastDonation {
+            color: gray;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="inbox">
+    <div class="header">Blood Donor Inbox</div>
+    <div id="inbox"></div>
+</div>
+
+<script>
+const donors = [
+    { name: "Rahul", blood: "A+", contact: "9876543210", lastDonation: "2025-12-01" },
+    { name: "Anu", blood: "A-", contact: "9123456780", lastDonation: "2025-11-15" },
+    { name: "Sita", blood: "B+", contact: "9012345678", lastDonation: "2025-10-10" },
+    { name: "Ramesh", blood: "B-", contact: "9988776655", lastDonation: "2025-09-20" },
+    { name: "Maya", blood: "O+", contact: "9765432109", lastDonation: "2025-12-15" },
+    { name: "Kiran", blood: "O-", contact: "9654321098", lastDonation: "2025-11-05" },
+    { name: "Anitha", blood: "AB+", contact: "9543210987", lastDonation: "2025-10-25" },
+    { name: "Vikram", blood: "AB-", contact: "9432109876", lastDonation: "2025-09-30" }
+];
+
+const inboxDiv = document.getElementById("inbox");
+
+donors.forEach(donor => {
+    let div = document.createElement("div");
+    div.className = "donor";
+
+    // Get initials for avatar
+    const initials = donor.name.split(" ").map(n => n[0]).join("");
+
+    div.innerHTML = `
+        <div class="avatar">${initials}</div>
+        <div class="details">
+            <div class="name">${donor.name}</div>
+            <div class="blood">Blood Group: ${donor.blood}</div>
+            <div class="lastDonation">Last Donation: ${donor.lastDonation}</div>
+        </div>
+    `;
+
+    div.onclick = () => alert(`Contact ${donor.name} at ${donor.contact}`);
+
+    inboxDiv.appendChild(div);
+});
+</script>
+
+</body>
+</html>
